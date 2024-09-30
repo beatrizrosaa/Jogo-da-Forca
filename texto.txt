@@ -1,0 +1,132 @@
+import React from 'react';
+import styled from 'styled-components';
+import image1 from '../images/image1.jpg';
+import image2 from '../images/image2.jpg';
+
+const ImageContainer = styled.div`
+  width: 300px;
+  height: 300px;
+  background-image: url(${image1});
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.3s ease-in-out;
+
+  &:hover {
+    background-image: url(${image2});
+  }
+`;
+
+const ImageSwap: React.FC = () => {
+  return <ImageContainer />;
+};
+
+export default ImageSwap;
+
+
+
+  const confettiCount = 100; // Quantidade de confetes
+
+  for (let i = 0; i < confettiCount; i++) {
+      const confetti = document.createElement('div'); // Cria um elemento div para cada confete
+      const size = Math.random() * 10 + 5; // Tamanho aleatório entre 5 e 15 pixels
+      const color = colors[Math.floor(Math.random() * colors.length)]; // Escolhe uma cor aleatória
+
+      confetti.style.position = 'absolute';
+      confetti.style.width = size + 'px';
+      confetti.style.height = size + 'px';
+      confetti.style.backgroundColor = color;
+      confetti.style.opacity = '0.8';
+      confetti.style.borderRadius = '50%';
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`; // Rotaciona aleatoriamente o confete
+      confetti.style.left = Math.random() * 100 + '%'; // Posição horizontal aleatória
+      confetti.style.animation = 'fall 3s linear infinite'; // Adiciona uma animação de queda
+
+      container.appendChild(confetti); // Adiciona o confete ao contêiner
+  }
+
+  document.body.appendChild(container); // Adiciona o contêiner ao corpo da página
+
+
+
+
+
+
+
+
+
+
+
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    gap: .25rem;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: monospace;
+`
+
+type palavrasProps = {
+    letrasAdivinhadas: string[],
+    palavraAdivinhar: string
+
+}
+
+export default function Palavras({letrasAdivinhadas,palavraAdivinhar}: palavrasProps ) {
+    
+
+    return (
+        <Wrapper>
+            {palavraAdivinhar.split("").map((letter, index) => (
+                <span style={{ borderBottom: '0.1em solid white'}} key={index}>
+                    <span style={{visibility: letrasAdivinhadas.includes(letter) ? "visible" : "hidden"}}>{letter}</span>
+                    
+                </span>
+            ))}
+        </Wrapper>
+    );
+}
+
+
+
+
+function play(){
+
+    const [palavraAdivinhar, setPalavraAdivinhar] = useState(() => {
+        return palavras[(Math.random() * palavras.length)]
+      })
+  
+    const [letrasAdivinhadas, setletrasAdivinhadas] = useState<string[]>([])
+
+    const letrasIncorretas = [letrasAdivinhadas.filter(letter => !palavraAdivinhar.includes(letter)) ]
+
+
+
+return(
+   <div className="jogo" style={{
+    position:'relative',
+    maxWidth: "800px",
+    display: "flex",
+    flexDirection: "column",
+    gap:"2rem",
+    margin: "0 auto",
+    alignItems: "center"
+}}>
+    <h2>game</h2>
+    <Desenho nTentativas={letrasIncorretas.length}/>
+    <Palavras letrasAdivinhadas={letrasAdivinhadas} palavraAdivinhar = {palavraAdivinhar}/>
+    <div className="teclado"><Keyboard/></div>
+   </div>
+  )}
+
+
+export default play;
+
+
+
+const [palavraAdivinhar, setPalavraAdivinhar] = useState(() => {
+    return palavras[(Math.random() * palavras.length)]
+})
+
+
